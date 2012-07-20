@@ -1,0 +1,10 @@
+{
+    "autoload" : {
+        "psr-0" : { "Gumflap" : "src" }
+    }, 
+    "minimum-stability" : "dev",
+    "require" : {
+        "twig/twig" : "@stable",
+        "silex/silex" : "@dev"
+    }
+}
