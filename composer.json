@@ -5,6 +5,10 @@
     "minimum-stability" : "dev",
     "require" : {
         "twig/twig" : "@stable",
-        "silex/silex" : "@dev"
+        "silex/silex" : "@dev",
+        "kriswallsmith/buzz" : "@stable"
+    },
+    "require-dev" : {
+        "symfony/browser-kit" : "2.1.*"
     }
 }

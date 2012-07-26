@@ -20,6 +20,10 @@ class MessageControllerProvider implements \Silex\ControllerProviderInterface
         $controllers = $app['controllers_factory'];
 
         $controllers->post('/messages', function (Application $app, Request $request) {
+            if (false == $message = trim($request->request->get('message', ''))) {
+                return new Response('', 400);
+            }
+
             return new Response('', 201);
         });
 
