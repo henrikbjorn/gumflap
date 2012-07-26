@@ -3,6 +3,7 @@
 namespace Gumflap\Provider;
 
 use Silex\Application;
+use Pusher;
 
 /**
  * @author Henrik Bjornskov <henrik@bjrnskov.dk>
@@ -12,7 +13,7 @@ class PusherServiceProvider implements \Silex\ServiceProviderInterface
     public function register(Application $app)
     {
         $app['pusher'] = $app->share(function () use ($app) {
-            new Pusher($app['pusher.key'], $app['pusher.secret'], $app['pusher.app_id']);
+            return new Pusher($app['pusher.key'], $app['pusher.secret'], $app['pusher.app_id']);
         });
     }
 

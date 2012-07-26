@@ -24,12 +24,42 @@ class ApplicationTest extends \Silex\WebTestCase
 
     public function testMessageIsCreated()
     {
+        $pusher = $this->createPusherMock();
+        $pusher
+            ->expects($this->once())
+            ->method('trigger')
+            ->with($this->equalTo('gumflap'), $this->equalTo('message'), $this->equalTo('Do that pusher thing!'))
+            ->will($this->returnValue(true))
+        ;
+
+        $this->app['pusher'] = $pusher;
+
         $client = $this->createClient();
         $crawler = $client->request('POST', '/messages', array(
             'message' => 'Do that pusher thing!',
         ));
 
-        $this->assertEquals(201, $client->getResponse()->getStatusCode());
+        $this->assertEquals(204, $client->getResponse()->getStatusCode());
+    }
+
+    public function testResponseWhenPusherIsFalse()
+    {
+
+        $pusher = $this->createPusherMock();
+        $pusher
+            ->expects($this->once())
+            ->method('trigger')
+            ->will($this->returnValue(false))
+        ;
+
+        $this->app['pusher'] = $pusher;
+
+        $client = $this->createClient();
+        $crawler = $client->request('POST', '/messages', array(
+            'message' => 'Do that pusher thing!',
+        ));
+
+        $this->assertEquals(502, $client->getResponse()->getStatusCode());
     }
 
     public function testMessageIsNotCreatedWhenEmpty()
@@ -39,7 +69,7 @@ class ApplicationTest extends \Silex\WebTestCase
             'message' => '     ',
         ));
 
-        $this->assertEquals(400, $client->getResponse()->getStatusCode());
+        $this->assertEquals(409, $client->getResponse()->getStatusCode());
     }
 
     public function testMessageIsNotCreatedWhenMissing()
@@ -47,6 +77,14 @@ class ApplicationTest extends \Silex\WebTestCase
         $client = $this->createClient();
         $crawler = $client->request('POST', '/messages');
 
-        $this->assertEquals(400, $client->getResponse()->getStatusCode());
+        $this->assertEquals(409, $client->getResponse()->getStatusCode());
+    }
+
+    protected function createPusherMock()
+    {
+        return $this->getMockBuilder('Pusher')
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
     }
 }

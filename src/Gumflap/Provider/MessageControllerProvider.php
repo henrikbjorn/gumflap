@@ -21,10 +21,14 @@ class MessageControllerProvider implements \Silex\ControllerProviderInterface
 
         $controllers->post('/messages', function (Application $app, Request $request) {
             if (false == $message = trim($request->request->get('message', ''))) {
-                return new Response('', 400);
+                return new Response('Mising "message" from POST body.', 409);
             }
 
-            return new Response('', 201);
+            if (false == $app['pusher']->trigger('gumflap', 'message', $message)) {
+                return new Response('Message could not be delivered to Pusher.', 502);
+            }
+
+            return new Response('', 204);
         });
 
         return $controllers;
