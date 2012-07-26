@@ -11,7 +11,11 @@ class ApplicationTest extends \Silex\WebTestCase
 {
     public function createApplication()
     {
-        return new Application();
+        return new Application(array(
+            'pusher.key' => 'pusher key',
+            'pusher.secret' => 'pusher secret',
+            'pusher.app_id' => 'pusher app id',
+        ));
     }
 
     public function testDefaultPage()
@@ -35,7 +39,7 @@ class ApplicationTest extends \Silex\WebTestCase
         $this->app['pusher'] = $pusher;
 
         $client = $this->createClient();
-        $crawler = $client->request('POST', '/messages', array(
+        $crawler = $client->request('POST', '/message', array(
             'message' => 'Do that pusher thing!',
         ));
 
@@ -55,7 +59,7 @@ class ApplicationTest extends \Silex\WebTestCase
         $this->app['pusher'] = $pusher;
 
         $client = $this->createClient();
-        $crawler = $client->request('POST', '/messages', array(
+        $crawler = $client->request('POST', '/message', array(
             'message' => 'Do that pusher thing!',
         ));
 
@@ -65,7 +69,7 @@ class ApplicationTest extends \Silex\WebTestCase
     public function testMessageIsNotCreatedWhenEmpty()
     {
         $client = $this->createClient();
-        $crawler = $client->request('POST', '/messages', array(
+        $crawler = $client->request('POST', '/message', array(
             'message' => '     ',
         ));
 
@@ -75,7 +79,7 @@ class ApplicationTest extends \Silex\WebTestCase
     public function testMessageIsNotCreatedWhenMissing()
     {
         $client = $this->createClient();
-        $crawler = $client->request('POST', '/messages');
+        $crawler = $client->request('POST', '/message');
 
         $this->assertEquals(409, $client->getResponse()->getStatusCode());
     }

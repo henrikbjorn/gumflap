@@ -1,0 +1,5 @@
+{
+    "pusher.key" : "your key",
+    "pusher.secret" : "your secret",
+    "pusher.app_id" : "your app id"
+}
