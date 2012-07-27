@@ -16,11 +16,12 @@ class Application extends \Silex\Application
     {
         parent::__construct();
 
+        $this->register(new PusherServiceProvider(), $configs);
         $this->register(new TwigServiceProvider(), array(
             'twig.path' =>  __DIR__ . '/../../templates',
         ));
 
-        $this->register(new PusherServiceProvider(), $configs);
+        $this['twig']->addGlobal('pusher', $configs);
 
         $this->mount('', new DefaultControllerProvider());
         $this->mount('', new MessageControllerProvider());

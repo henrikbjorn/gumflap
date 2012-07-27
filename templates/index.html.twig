@@ -12,7 +12,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
     <script>
-        var pusher = new Pusher('c7a03a82fc0062ed82fa');
+        var pusher = new Pusher('{{ attribute(pusher, 'pusher.key') }}');
         var channel = pusher.subscribe('gumflap');
 
         channel.bind('message', function (message) {
