@@ -10,7 +10,7 @@ use Silex\Application;
 class DefaultControllerProvider implements \Silex\ControllerProviderInterface
 {
     /**
-     * @param Application $app
+     * @param  Application                $app
      * @return Silex\ControllerCollection
      */
     public function connect(Application $app)

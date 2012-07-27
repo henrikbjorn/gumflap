@@ -12,6 +12,9 @@ use Silex\Provider\TwigServiceProvider;
  */
 class Application extends \Silex\Application
 {
+    /**
+     * @param array $configs
+     */
     public function __construct(array $configs = array())
     {
         parent::__construct();

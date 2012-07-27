@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 class MessageControllerProvider implements \Silex\ControllerProviderInterface
 {
     /**
-     * @param Application $app
+     * @param  Application                         $app
      * @return Silex\ControllerCollectionInterface
      */
     public function connect(Application $app)

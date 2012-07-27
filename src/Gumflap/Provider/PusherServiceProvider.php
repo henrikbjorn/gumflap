@@ -10,6 +10,9 @@ use Pusher;
  */
 class PusherServiceProvider implements \Silex\ServiceProviderInterface
 {
+    /**
+     * @param Application $app
+     */
     public function register(Application $app)
     {
         $app['pusher'] = $app->share(function () use ($app) {
@@ -17,6 +20,10 @@ class PusherServiceProvider implements \Silex\ServiceProviderInterface
         });
     }
 
+    /**
+     * @param  Application      $app
+     * @throws RuntimeException
+     */
     public function boot(Application $app)
     {
         foreach (array('key', 'secret', 'app_id') as $key) {
