@@ -28,20 +28,22 @@ class ApplicationTest extends \Silex\WebTestCase
 
     public function testMessageIsCreated()
     {
+        $payload = array(
+            'message' => 'Do that pusher thing!',
+            'username' => 'Henrik',
+        );
         $pusher = $this->createPusherMock();
         $pusher
             ->expects($this->once())
             ->method('trigger')
-            ->with($this->equalTo('gumflap'), $this->equalTo('message'), $this->equalTo('Do that pusher thing!'))
+            ->with($this->equalTo('gumflap'), $this->equalTo('message'), $this->equalTo($payload))
             ->will($this->returnValue(true))
         ;
 
         $this->app['pusher'] = $pusher;
 
         $client = $this->createClient();
-        $crawler = $client->request('POST', '/message', array(
-            'message' => 'Do that pusher thing!',
-        ));
+        $crawler = $client->request('POST', '/message', $payload);
 
         $this->assertEquals(204, $client->getResponse()->getStatusCode());
     }
@@ -61,9 +63,21 @@ class ApplicationTest extends \Silex\WebTestCase
         $client = $this->createClient();
         $crawler = $client->request('POST', '/message', array(
             'message' => 'Do that pusher thing!',
+            'username' => 'Henrik',
         ));
 
         $this->assertEquals(502, $client->getResponse()->getStatusCode());
+    }
+
+    public function testMessageIsNotCreatedWhenUsernameIsMissing()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('POST', '/message', array(
+            'message' => 'This message is not empty',
+            'username' => '             ',
+        ));
+
+        $this->assertEquals(409, $client->getResponse()->getStatusCode());
     }
 
     public function testMessageIsNotCreatedWhenEmpty()

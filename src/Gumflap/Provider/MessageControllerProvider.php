@@ -24,7 +24,11 @@ class MessageControllerProvider implements \Silex\ControllerProviderInterface
                 return new Response('Mising "message" from POST body.', 409);
             }
 
-            if (false == $app['pusher']->trigger('gumflap', 'message', $message)) {
+            if (false == $username = trim($request->request->get('username', ''))) {
+                return new Response('Missing "username" from POST body.', 409);
+            }
+
+            if (false == $app['pusher']->trigger('gumflap', 'message', compact('message', 'username'))) {
                 return new Response('Message could not be delivered to Pusher.', 502);
             }
 
