@@ -37,26 +37,42 @@
         });
     </script>
 
-    <style>
-        #messages p{background-color:#eee;margin:0;padding:5px 5px 0px;border-bottom:1px dashed #000}
-        #messages p:nth-child(2n){background-color:#fff;}
-    </style>
+ 
+    <link rel="stylesheet" type="text/css" href="/css/foundation.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/app.css" />
 </head>
 
 <body>
 
-<h1>Gumflap</h1>
+    <div class="row">
+        <div class="twelve columns">
+            <h1>Gumflap</h1>
+            <h3 class="subheader">Realtime IRC like chat application. Ported from John Barnett's Play by Play screencast</h3>
 
-<h2>Messages</h2>
-<div id="messages"></div>
+            <div id="messages" class="panel">
+            </div>
 
-<h2>Write your message</h2>
-<form action="/index.php/message" method="post">
-    <label>Username: <input type="text" name="username" /></label>
-    <label>Message: <input type="text" name="message" /></label>
+            <div class="row">
+                <form action="/index.php/message" method="post">
+                    <div class="three columns">
+                        <input type="text" placeholder="Nickname" name="username" />
+                    </div>
 
-    <button type="submit">Send</button>
-</form>
+                    <div class="nine columns">
+                        <div class="row collapse">
+                            <div class="eight columns">
+                                <input type="text" placeholder="Message" name="message" />
+                            </div>
+
+                            <div class="four columns">
+                                <button class="radius small postfix button" type="submit">Flap!</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

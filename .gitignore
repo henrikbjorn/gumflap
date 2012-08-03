@@ -2,3 +2,4 @@ vendor
 composer.lock
 config/gumflap.json
 coverage
+.DS_Store
