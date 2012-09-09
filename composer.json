@@ -24,7 +24,8 @@
     "require" : {
         "twig/twig" : "@stable",
         "silex/silex" : "@dev",
-        "squeeks/pusher" : "@dev"
+        "squeeks/pusher" : "@dev",
+        "doctrine/dbal" : "@dev"
     },
     "require-dev" : {
         "symfony/browser-kit" : "2.1.*"

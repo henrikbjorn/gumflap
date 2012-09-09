@@ -5,7 +5,9 @@ namespace Gumflap;
 use Gumflap\Provider\DefaultControllerProvider;
 use Gumflap\Provider\MessageControllerProvider;
 use Gumflap\Provider\PusherServiceProvider;
+use Gumflap\Provider\GumflapServiceProvider;
 use Silex\Provider\TwigServiceProvider;
+use Silex\Provider\DoctrineServiceProvider;
 
 /**
  * @author Henrik Bjornskov <henrik@bjrnskov.dk>
@@ -19,6 +21,8 @@ class Application extends \Silex\Application
     {
         parent::__construct();
 
+        $this->register(new GumflapServiceProvider(), $configs);
+        $this->register(new DoctrineServiceProvider(), $configs);
         $this->register(new PusherServiceProvider(), $configs);
         $this->register(new TwigServiceProvider(), array(
             'twig.path' =>  __DIR__ . '/../../templates',

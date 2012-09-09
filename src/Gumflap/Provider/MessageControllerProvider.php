@@ -32,6 +32,8 @@ class MessageControllerProvider implements \Silex\ControllerProviderInterface
                 return new Response('Message could not be delivered to Pusher.', 502);
             }
 
+            $app['gumflap.gateway']->insert($username, $message);
+
             return new Response('', 204);
         });
 

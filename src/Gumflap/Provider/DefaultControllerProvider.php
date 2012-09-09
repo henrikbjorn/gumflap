@@ -18,7 +18,9 @@ class DefaultControllerProvider implements \Silex\ControllerProviderInterface
         $controllers = $app['controllers_factory'];
 
         $controllers->get('/', function (Application $app) {
-            return $app['twig']->render('index.html.twig');
+            return $app['twig']->render('index.html.twig', array(
+                'logs' => $app['gumflap.gateway']->logs(),
+            ));
         });
 
         return $controllers;

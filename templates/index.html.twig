@@ -29,7 +29,7 @@
 
                 var form = $(e.currentTarget);
 
-                $.post('/index.php/message', form.serialize(), function (data) {
+                $.post(form.attr('action'), form.serialize(), function (data) {
                     $('input[name="message"]', form).val('').focus();
                 });
 
@@ -50,10 +50,13 @@
             <h3 class="subheader">Realtime IRC like chat application. Ported from John Barnett's Play by Play screencast</h3>
 
             <div id="messages" class="panel">
+                {% for log in logs %}
+                    <p><strong>{{ log.username }}</strong> {{ log.message }}</p>
+                {% endfor %}
             </div>
 
             <div class="row">
-                <form action="/index.php/message" method="post">
+                <form action="/message" method="post">
                     <div class="three columns">
                         <input type="text" placeholder="Nickname" name="username" />
                     </div>
