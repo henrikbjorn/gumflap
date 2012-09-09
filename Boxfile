@@ -4,6 +4,7 @@ web1:
   php_version: 5.3.10
   shared_writable_dirs:
     - /config
+    - /vendors
   php_extensions:
     - apc
     - zip
