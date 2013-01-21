@@ -15,6 +15,10 @@ class PusherServiceProvider implements \Silex\ServiceProviderInterface
      */
     public function register(Application $app)
     {
+        $app['pusher.key'] = '';
+        $app['pusher.secret'] = '';
+        $app['pusher.app_id'] = '';
+
         $app['pusher'] = $app->share(function () use ($app) {
             return new Pusher($app['pusher.key'], $app['pusher.secret'], $app['pusher.app_id']);
         });
@@ -26,15 +30,15 @@ class PusherServiceProvider implements \Silex\ServiceProviderInterface
      */
     public function boot(Application $app)
     {
-        foreach (array('key', 'secret', 'app_id') as $key) {
-            $key = 'pusher.' . $key;
 
-            if (false == isset($app[$key])) {
-                throw new \RuntimeException(sprintf(
-                    'You have not provided a value for "%s" which is required',
-                    $key
-                ));
-            }
-        }
+        $app['twig'] = $app->share($app->extend('twig', function (\Twig_Environment $twig, Application $app) {
+            $twig->addGlobal('pusher', array(
+                'pusher.key' => $app['pusher.key'],
+                'pusher.secret' => $app['pusher.secret'],
+                'pusher.app_id' => $app['pusher.app_id'],
+            ));
+
+            return $twig;
+        }));
     }
 }

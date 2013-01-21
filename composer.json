@@ -22,8 +22,8 @@
     }, 
     "minimum-stability" : "dev",
     "require" : {
-        "twig/twig" : "@stable",
-        "silex/silex" : "@dev",
+        "php" : ">=5.3.3",
+        "henrikbjorn/flint" : "~1.0",
         "squeeks/pusher" : "@dev",
         "doctrine/dbal" : "@dev"
     },
