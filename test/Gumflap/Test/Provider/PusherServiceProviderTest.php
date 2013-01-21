@@ -27,24 +27,4 @@ class PusherServiceProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Pusher', $this->app['pusher']);
     }
 
-    /**
-     * @dataProvider providerMissingKeys
-     */
-    public function testMissingKeyException($parameters)
-    {
-        $this->setExpectedException('RuntimeException');
-
-        $this->app->register($this->provider, $parameters);
-
-        $this->provider->boot($this->app);
-    }
-
-    public function providerMissingKeys()
-    {
-        return array(
-            array(array('key' => 'key', 'secret' => 'secret')),
-            array(array('app_id' => 'app_id', 'secret' => 'secret')),
-            array(array('app_id' => 'app_id', 'key' => 'key')),
-        );
-    }
 }
