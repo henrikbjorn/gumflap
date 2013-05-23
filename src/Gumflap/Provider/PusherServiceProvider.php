@@ -33,7 +33,7 @@ class PusherServiceProvider implements \Silex\ServiceProviderInterface
 
         $app['twig'] = $app->share($app->extend('twig', function (\Twig_Environment $twig, Application $app) {
             $twig->addGlobal('pusher', array(
-                'pusher.key' => $app['pusher.key'],
+                'pusher.key'    => $app['pusher.key'],
                 'pusher.secret' => $app['pusher.secret'],
                 'pusher.app_id' => $app['pusher.app_id'],
             ));
