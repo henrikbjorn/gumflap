@@ -1,32 +1,19 @@
 {
-    "name" : "henrikbjorn/gumflap",
+    "name"        : "henrikbjorn/gumflap",
     "description" : "A Remake of the Gumflap application created in a PeepCode screencast",
-    "license" : "MIT",
-    "repositories" : [{
-        "type" : "package",
-        "package" : {
-            "name" : "squeeks/pusher",
-            "version" : "dev-master",
-            "source" : {
-                "type" : "git",
-                "url" : "git://github.com/squeeks/Pusher-PHP.git",
-                "reference" : "master"
-            },
-            "autoload" : {
-                "files" : ["lib/Pusher.php"]
-            }
-        }
-    }],
+    "license"     : "MIT",
+
     "autoload" : {
         "psr-0" : { "Gumflap" : "src" }
-    }, 
-    "minimum-stability" : "dev",
-    "require" : {
-        "php" : ">=5.3.3",
-        "henrikbjorn/flint" : "~1.0",
-        "squeeks/pusher" : "@dev",
-        "doctrine/dbal" : "@dev"
     },
+
+    "require" : {
+        "php"                      : ">=5.3.3",
+        "henrikbjorn/flint"        : "~1.2",
+        "pusher/pusher-php-server" : "dev-master",
+        "doctrine/dbal"            : "~2.3"
+    },
+
     "require-dev" : {
         "symfony/browser-kit" : "2.1.*"
     }

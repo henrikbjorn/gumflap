@@ -16,14 +16,14 @@ class MessageController extends \Flint\Controller\Controller
      */
     public function createAction(Request $request)
     {
-        $pusher = $this->app['pusher'];
-        $gateway = $this->app['gumflap.gateway'];
+        $pusher = $this->get('pusher');
+        $gateway = $this->get('gumflap.gateway');
 
-        if (false == $message = trim($request->request->get('message', ''))) {
+        if (false == $message = trim($request->request->get('message'))) {
             return new Response('Mising "message" from POST body.', 409);
         }
 
-        if (false == $username = trim($request->request->get('username', ''))) {
+        if (false == $username = trim($request->request->get('username'))) {
             return new Response('Missing "username" from POST body.', 409);
         }
 

@@ -2,11 +2,8 @@
 
 namespace Gumflap;
 
-use Gumflap\Provider\DefaultControllerProvider;
-use Gumflap\Provider\MessageControllerProvider;
 use Gumflap\Provider\PusherServiceProvider;
 use Gumflap\Provider\GumflapServiceProvider;
-use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\DoctrineServiceProvider;
 
 /**
@@ -15,28 +12,17 @@ use Silex\Provider\DoctrineServiceProvider;
 class Application extends \Flint\Application
 {
     /**
-     * @param array $configs
+     * {@inheritDoc}
      */
-    public function __construct($rootDir, $debug = false)
+    public function __construct($rootDir, $debug = false, array $parameters = array())
     {
-        parent::__construct($rootDir, $debug);
+        parent::__construct($rootDir, $debug, $parameters);
 
-        $this->inject(array(
-            'twig.path' => $this['root_dir'] . '/views',
-        ));
+        $this['twig.path'] = $rootDir . '/views';
+        $this['routing.resource'] = $rootDir . '/config/routing.xml';
 
         $this->register(new GumflapServiceProvider);
         $this->register(new DoctrineServiceProvider);
         $this->register(new PusherServiceProvider);
-    }
-
-    /**
-     * @param array $parameters
-     */
-    public function inject(array $parameters)
-    {
-        foreach ($parameters as $k => $v) {
-            $this[$k] = $v;
-        }
     }
 }

@@ -12,7 +12,7 @@ class DefaultController extends \Flint\Controller\Controller
      */
     public function indexAction()
     {
-        $logs = $this->app['gumflap.gateway']->logs();
+        $logs = $this->get('gumflap.gateway')->logs();
 
         return $this->render('index.html.twig', compact('logs'));
     }

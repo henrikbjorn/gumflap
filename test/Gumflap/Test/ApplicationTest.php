@@ -11,15 +11,15 @@ class ApplicationTest extends \Silex\WebTestCase
 {
     public function createApplication()
     {
-        $app = new Application(array(
-            'debug' => true,
+        $app = require __DIR__ . '/../../../src/app.php';
+        $app->inject(array(
             'pusher.key' => 'pusher key',
             'pusher.secret' => 'pusher secret',
             'pusher.app_id' => 'pusher app id',
             'db.options' => array(
                 'driver' => 'pdo_sqlite',
                 'path' => '/var/tmp/gumflap.db',
-            )
+            ),
         ));
 
         $app['gumflap.gateway'] = $this->getMockBuilder('Gumflap\Gateway')
