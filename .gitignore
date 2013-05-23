@@ -1,5 +1,6 @@
 vendor
 composer.lock
 config/gumflap.json
+config/*.db
 coverage
 .DS_Store
