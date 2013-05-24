@@ -1,7 +1,7 @@
 web1:
   name: Gumflap
   document_root: web
-  php_version: 5.3.10
+  php_version: 5.4.14
   shared_writable_dirs:
     - /config
     - /vendors
@@ -11,4 +11,4 @@ web1:
     - curl
     - pdo_mysql
   after_build:
-    - "if [ ! -f composer.phar ]; then curl -s http://getcomposer.org/installer | php; fi; php composer.phar -q install"
+      - "if [ ! -f composer.phar ]; then curl -s http://getcomposer.org/installer | php; fi; php composer.phar -q install -o"
