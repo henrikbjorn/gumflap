@@ -6,7 +6,6 @@ web1:
     - /config
     - /vendors
   php_extensions:
-    - apc
     - zip
     - curl
     - pdo_mysql
