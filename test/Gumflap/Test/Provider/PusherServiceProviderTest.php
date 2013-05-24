@@ -42,4 +42,5 @@ class PusherServiceProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('pusher', $globals);
         $this->assertEquals($keys, $globals['pusher']);
     }
+
 }
