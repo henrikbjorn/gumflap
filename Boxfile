@@ -10,4 +10,4 @@ web1:
     - curl
     - pdo_mysql
   after_build:
-      - "if [ ! -f composer.phar ]; then curl -s http://getcomposer.org/installer | php; fi; php composer.phar -q install -o"
+      - "if [ ! -f composer.phar ]; then curl -s http://getcomposer.org/installer | php; fi; php composer.phar install -o --no-progress"
