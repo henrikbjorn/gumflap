@@ -2,6 +2,7 @@
 
 namespace Gumflap\Controller;
 
+use Gumflap\DomainCommand\PostMessageCommand;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,9 +17,6 @@ class MessageController extends \Flint\Controller\Controller
      */
     public function createAction(Request $request)
     {
-        $pusher = $this->get('pusher');
-        $gateway = $this->get('gumflap.gateway');
-
         if (false == $message = trim($request->request->get('message'))) {
             return new Response('Mising "message" from POST body.', 409);
         }
@@ -27,12 +25,8 @@ class MessageController extends \Flint\Controller\Controller
             return new Response('Missing "username" from POST body.', 409);
         }
 
-        if (false == $pusher->trigger('gumflap', 'message', compact('message', 'username'))) {
-            return new Response('Message could not be delivered to Pusher.', 502);
-        }
+        $this->get('command_bus')->handle(new PostMessageCommand(compact('username', 'message')));
 
-        $gateway->insert($username, $message);
-
-        return new Response('', 204);
+        return new Response('', 202);
     }
 }

@@ -4,17 +4,14 @@
     "license"     : "MIT",
 
     "autoload" : {
-        "psr-0" : { "Gumflap" : "src" }
+        "psr-0" : { "Gumflap\\" : "src" }
     },
 
     "require" : {
         "php"                      : ">=5.3.3",
         "henrikbjorn/flint"        : "~1.2",
         "pusher/pusher-php-server" : "dev-master",
+        "beberlei/lite-cqrs"       : "dev-master",
         "doctrine/dbal"            : "~2.3"
-    },
-
-    "require-dev" : {
-        "symfony/browser-kit" : "2.1.*"
     }
 }
