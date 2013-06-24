@@ -4,40 +4,6 @@
     <meta charset="utf-8" />
 
     <title>Gumflap</title>
-
-    <!--[if IE]>
-        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
-    <script>
-        var pusher = new Pusher('{{ attribute(pusher, 'pusher.key') }}');
-        var channel = pusher.subscribe('gumflap');
-
-        channel.bind('message', function (message) {
-            $('#messages').append($('<p />', {
-                'html' : '<strong>' + message.username + '</strong>&nbsp;' + message.message
-            }))
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('form').submit(function (e) {
-                e.preventDefault();
-
-                var form = $(e.currentTarget);
-
-                $.post(form.attr('action'), form.serialize(), function (data) {
-                    $('input[name="message"]', form).val('').focus();
-                });
-
-            });
-        });
-    </script>
-
- 
     <link rel="stylesheet" type="text/css" href="/css/foundation.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/app.css" />
 </head>
@@ -74,8 +40,20 @@
                     </div>
                 </form>
             </div>
+
         </div>
     </div>
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
+    <script src="/js/page.js"></script>
+    <script>
+        var pusher = new Pusher('{{ attribute(pusher, 'pusher.key') }}'),
+            gumflap = new Gumflap(pusher, $('form'), $('#messages'));
+
+        // Initialize
+        gumflap.initialize();
+    </script>
+ 
 </body>
 </html>
