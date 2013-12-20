@@ -45,11 +45,19 @@
     </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
+    <script src="http://js.pusher.com/2.1/pusher.min.js"></script>
     <script src="/js/page.js"></script>
     <script>
         var pusher = new Pusher('{{ app['pusher.key'] }}');
-        gumflap = new Gumflap(pusher, $('form'), $('#messages'));
+        var gumflap = new Gumflap(pusher, $('form'), $('#messages'));
+
+        {% if app.debug %}
+            Pusher.log = function(message) {
+                if (window.console && window.console.log) {
+                    window.console.log(message);
+                }
+            };
+        {% endif %}
 
         // Initialize
         gumflap.initialize();

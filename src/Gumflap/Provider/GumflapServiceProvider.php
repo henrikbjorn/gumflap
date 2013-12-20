@@ -4,8 +4,6 @@ namespace Gumflap\Provider;
 
 use Gumflap\Gateway;
 use Gumflap\Poster;
-//use LiteCQRS\Bus\EventMessageHandlerFactory;
-//use LiteCQRS\Bus\IdentityMap\EventProviderQueue;
 use Pimple;
 
 class GumflapServiceProvider implements \Silex\Api\ServiceProviderInterface
