@@ -5,12 +5,14 @@ web1:
   shared_writable_dirs:
     - /config
     - /cache
+    - /vendor
   php_extensions:
     - zip
     - curl
     - pdo_mysql
   after_build:
     - "mkdir ~/.composer && echo '{\"config\":{\"github-oauth\": {\"github.com\":\"fa354b2f030836334eac842f8fd69a03e353d247\"}}}' > ~/.composer/config.json"
-    - "if [ ! -f composer.phar ]; then curl -s http://getcomposer.org/installer | php; fi; php composer.phar install -o --no-progress"
+    - "if [ ! -f composer.phar ]; then curl -s http://getcomposer.org/installer | php; fi;"
   before_deploy:
     - "rm -Rf cache/*"
+    - "php composer.phar install -o --no-progress"
