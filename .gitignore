@@ -1,6 +1,12 @@
-vendor
 composer.lock
+
 config/gumflap.json
 config/*.db
+
 coverage
+vendor
+cache
+
 .DS_Store
+
+!cache/.gitkeep
