@@ -20,11 +20,11 @@ class LiteCQRSServiceProvider implements \Silex\Api\ServiceProviderInterface
             return new SynchronousInProcessEventBus($app['lite_cqrs.event_handler_locator']);
         };
 
-        $app['lite_cqrs.command_handler_locator'] = function () {
-            return new MemoryCommandHandlerLocator();
+        $app['lite_cqrs.command_handler_locator'] = function ($app) {
+            return new MemoryCommandHandlerLocator;
         };
 
-        $app['lite_cqrs.event_handler_locator'] = function () {
+        $app['lite_cqrs.event_handler_locator'] = function ($app) {
             return new MemoryEventHandlerLocator();
         };
     }

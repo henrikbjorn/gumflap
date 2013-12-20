@@ -4,6 +4,7 @@ namespace Gumflap\Provider;
 
 use Gumflap\Gateway;
 use Gumflap\Poster;
+use Gumflap\Pusher;
 use Pimple;
 
 class GumflapServiceProvider implements \Silex\Api\ServiceProviderInterface
@@ -15,17 +16,21 @@ class GumflapServiceProvider implements \Silex\Api\ServiceProviderInterface
         };
 
         $app['gumflap.poster'] = function ($app) {
-            return new Poster($app['gumflap.gateway'], $app['pusher'], $app['lite_cqrs.event_bus']);
+            return new Poster($app['gumflap.gateway'], $app['lite_cqrs.event_bus']);
         };
 
-        $app->extend('lite_cqrs.command_handler_locator', function ($locator, $app) {
-            $locator->register('Gumflap\DomainCommand\PostMessageCommand', $app['gumflap.poster']);
+        $app['gumflap.pusher'] = function ($app) {
+            return new Pusher($app['pusher']);
+        };
+
+        $app->extend('lite_cqrs.event_handler_locator', function ($locator, $app) {
+            $locator->register($app['gumflap.pusher']);
 
             return $locator;
         });
 
-        $app->extend('lite_cqrs.event_handler_locator', function ($locator, $app) {
-            $locator->register($app['gumflap.poster']);
+        $app->extend('lite_cqrs.command_handler_locator', function ($locator, $app) {
+            $locator->register('Gumflap\DomainCommand\PostMessageCommand', $app['gumflap.poster']);
 
             return $locator;
         });
