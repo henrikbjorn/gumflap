@@ -10,6 +10,8 @@ Gumflap.prototype = {
         this.form.on('submit', $.proxy(this.onSubmit, this));
 
         this.channel.bind('message', $.proxy(this.onPusherMessage, this));
+
+        this.scrollToBottom();
     },
 
     postMessage : function () {
@@ -20,6 +22,8 @@ Gumflap.prototype = {
 
     onPusherMessage : function (message) {
         this.content.append('<p><strong>' + message[1] + '</strong>&nbsp;' + message[0]);
+
+        this.scrollToBottom();
     },
 
     onMessagePosted : function (data, textStatus) {
@@ -30,5 +34,9 @@ Gumflap.prototype = {
         e.preventDefault();
 
         this.postMessage();
+    },
+
+    scrollToBottom : function () {
+        this.content.scrollTop(this.content.prop('scrollHeight'));
     }
 };

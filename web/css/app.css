@@ -2,3 +2,7 @@ h1, h2, h3, h4, h5{
     font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
     font-weight:500;
 }
+
+#messages {height:400px;overflow-y:scroll;margin:0 0 10px 0}
+#messages p{padding:5px 0 5px 5px;margin:0;}
+#messages p:nth-child(odd){background:#eee}
