@@ -3,6 +3,11 @@ h1, h2, h3, h4, h5{
     font-weight:500;
 }
 
-#messages {height:400px;overflow-y:scroll;margin:0 0 10px 0}
+html, body{width:100%;height:100%;margin:0;padding:0;overflow:hidden;}
+
+#messages {position:absolute;top:76px;bottom:55px;width:100%;overflow-y:scroll;}
 #messages p{padding:5px 0 5px 5px;margin:0;}
 #messages p:nth-child(odd){background:#eee}
+
+form{position:absolute;bottom:0;width:100%;padding:10px;border-top:1px solid black}
+form input{margin:0px !important;}

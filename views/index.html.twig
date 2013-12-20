@@ -10,39 +10,31 @@
 
 <body>
 
-    <div class="row">
-        <div class="twelve columns">
-            <h1>Gumflap</h1>
-            <h3 class="subheader">Realtime IRC like chat application. Ported from John Barnett's Play by Play screencast</h3>
+    <h1>Gumflap</h1>
 
-            <div id="messages" class="panel">
-                {% for log in logs %}
-                    <p><strong>{{ log.username }}</strong> {{ log.message }}</p>
-                {% endfor %}
-            </div>
-
-            <div class="row">
-                <form action="/message" method="post">
-                    <div class="three columns">
-                        <input type="text" placeholder="Nickname" name="username" />
-                    </div>
-
-                    <div class="nine columns">
-                        <div class="row collapse">
-                            <div class="eleven columns">
-                                <input type="text" placeholder="Message" name="message" />
-                            </div>
-
-                            <div class="one columns">
-                                <button class="radius small postfix button" type="submit">Say!</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-        </div>
+    <div id="messages" class="panel">
+        {% for log in logs %}
+            <p><strong>{{ log.username }}</strong> {{ log.message }}</p>
+        {% endfor %}
     </div>
+
+    <form action="/message" method="post">
+        <div class="three columns">
+            <input type="text" placeholder="Nickname" name="username" />
+        </div>
+
+        <div class="nine columns">
+            <div class="row collapse">
+                <div class="eleven columns">
+                    <input type="text" placeholder="Message" name="message" />
+                </div>
+
+                <div class="one columns">
+                    <button class="radius small postfix button" type="submit">Say!</button>
+                </div>
+            </div>
+        </div>
+    </form>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="http://js.pusher.com/2.1/pusher.min.js"></script>
