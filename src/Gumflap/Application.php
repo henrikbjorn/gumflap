@@ -21,6 +21,9 @@ class Application extends \Brick\Application
         parent::__construct(array(
             'debug' => $debug,
             'root_dir' => $rootDir,
+            'config.options' => array(
+                'cache_dir' => $rootDir . '/cache',
+            ),
         ));
 
         $this->register(new LiteCQRSServiceProvider);

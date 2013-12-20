@@ -1,5 +1,11 @@
 <?php
 
-function create_application($debug = true) {
-    return new Gumflap\Application(__DIR__ . '/../../', $debug);
+namespace Gumflap;
+
+function create_application() {
+    return new Application(__DIR__ . '/../../', is_debug());
+}
+
+function is_debug() {
+    return getenv('SILEX_ENV') === 'prod';
 }
