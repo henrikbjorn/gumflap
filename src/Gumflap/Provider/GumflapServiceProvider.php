@@ -4,40 +4,32 @@ namespace Gumflap\Provider;
 
 use Gumflap\Gateway;
 use Gumflap\Poster;
-use LiteCQRS\Bus\EventMessageHandlerFactory;
-use LiteCQRS\Bus\IdentityMap\EventProviderQueue;
-use Silex\Application;
+//use LiteCQRS\Bus\EventMessageHandlerFactory;
+//use LiteCQRS\Bus\IdentityMap\EventProviderQueue;
+use Pimple;
 
-class GumflapServiceProvider implements \Silex\ServiceProviderInterface
+class GumflapServiceProvider implements \Silex\Api\ServiceProviderInterface
 {
-    public function register(Application $app)
+    public function register(Pimple $app)
     {
-        $app['gumflap.gateway'] = $app->share(function (Application $app) {
+        $app['gumflap.gateway'] = function ($app) {
             return new Gateway($app['db']);
+        };
+
+        $app['gumflap.poster'] = function ($app) {
+            return new Poster($app['gumflap.gateway'], $app['pusher'], $app['lite_cqrs.event_bus']);
+        };
+
+        $app->extend('lite_cqrs.command_handler_locator', function ($locator, $app) {
+            $locator->register('Gumflap\DomainCommand\PostMessageCommand', $app['gumflap.poster']);
+
+            return $locator;
         });
 
-        $app['gumflap.poster'] = $app->share(function (Application $app) {
-            return new Poster($app['gumflap.gateway'], $app['pusher'], $app['lite_cqrs.event_message_bus']);
+        $app->extend('lite_cqrs.event_handler_locator', function ($locator, $app) {
+            $locator->register($app['gumflap.poster']);
+
+            return $locator;
         });
-
-        $app['lite_cqrs.event_queue'] = $app->share(function ($app) {
-            return new EventProviderQueue($app['lite_cqrs.identity_map']);
-        });
-
-        $app['lite_cqrs.event_message_handler'] = $app->share(function ($app) {
-            return new EventMessageHandlerFactory($app['lite_cqrs.event_message_bus'], $app['lite_cqrs.event_queue']);
-        });
-
-        $app['lite_cqrs.commands'] = array(
-            "Gumflap\\DomainCommand\\PostMessageCommand" => "gumflap.poster",
-        );
-
-        $app['lite_cqrs.event_handlers'] = array(
-            "MessagePosted" => "gumflap.poster",
-        );
-    }
-
-    public function boot(Application $app)
-    {
     }
 }

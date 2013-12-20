@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Henrik Bjornskov <henrik@bjrnskov.dk>
  */
-class MessageController extends \Flint\Controller\Controller
+class MessageController extends AbstractController
 {
     /**
      * @param Request $request
@@ -25,7 +25,7 @@ class MessageController extends \Flint\Controller\Controller
             return new Response('Missing "username" from POST body.', 409);
         }
 
-        $this->get('command_bus')->handle(new PostMessageCommand(compact('username', 'message')));
+        $this->get('lite_cqrs.command_bus')->handle(new PostMessageCommand(compact('username', 'message')));
 
         return new Response('', 202);
     }

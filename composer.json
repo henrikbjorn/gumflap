@@ -4,12 +4,17 @@
     "license"     : "MIT",
 
     "autoload" : {
-        "psr-0" : { "Gumflap\\" : "src" }
+        "psr-0" : { "Gumflap\\" : "src" },
+        "files" : [ "src/Gumflap/functions.php" ]
     },
 
     "require" : {
         "php"                      : ">=5.3.3",
-        "henrikbjorn/flint"        : "~1.2",
+        "flint/brick"              : "dev-master",
+        "flint/tacker"             : "dev-master",
+        "silex/silex"              : "dev-2.0-experimental",
+        "twig/twig"                : "dev-master",
+        "pimple/pimple"            : "dev-master",
         "pusher/pusher-php-server" : "dev-master",
         "beberlei/lite-cqrs"       : "dev-master",
         "doctrine/dbal"            : "~2.3"

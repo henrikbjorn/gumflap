@@ -5,7 +5,7 @@ namespace Gumflap\Controller;
 /**
  * @author Henrik Bjornskov <henrik@bjrnskov.dk>
  */
-class DefaultController extends \Flint\Controller\Controller
+class DefaultController extends AbstractController
 {
     /**
      * @return string

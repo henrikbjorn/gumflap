@@ -2,10 +2,10 @@
 
 namespace Gumflap;
 
-use Pusher;
 use Gumflap\DomainCommand\PostMessageCommand;
 use Gumflap\DomainEvent\MessagePosted;
-use LiteCQRS\Bus\EventMessageBus;
+use LiteCQRS\Eventing\EventMessageBus;
+use Pusher;
 
 /**
  * @package Gumflap

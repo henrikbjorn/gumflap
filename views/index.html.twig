@@ -48,8 +48,8 @@
     <script src="http://js.pusher.com/1.12/pusher.min.js"></script>
     <script src="/js/page.js"></script>
     <script>
-        var pusher = new Pusher('{{ attribute(pusher, 'pusher.key') }}'),
-            gumflap = new Gumflap(pusher, $('form'), $('#messages'));
+        var pusher = new Pusher('{{ app['pusher.key'] }}');
+        gumflap = new Gumflap(pusher, $('form'), $('#messages'));
 
         // Initialize
         gumflap.initialize();

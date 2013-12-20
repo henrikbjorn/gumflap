@@ -5,7 +5,7 @@ namespace Gumflap\DomainEvent;
 /**
  * @package Gumflap
  */
-class MessagePosted extends \LiteCQRS\DomainObjectChanged
+class MessagePosted extends \LiteCQRS\DefaultDomainEvent
 {
     protected $username;
     protected $message;
@@ -16,6 +16,6 @@ class MessagePosted extends \LiteCQRS\DomainObjectChanged
      */
     public function __construct($username, $message)
     {
-        parent::__construct('MessagePosted', compact('username', 'message'));
+        parent::__construct(compact('username', 'message'));
     }
 }
