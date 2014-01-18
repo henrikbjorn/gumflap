@@ -9,5 +9,5 @@ web1:
     - pdo_mysql
   php_zend_extensions:
     - opcache
-  after_build:
-    - "composer dump-autoload"
+#  after_build:
+#    - "composer dump-autoload"
