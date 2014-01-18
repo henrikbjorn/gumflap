@@ -3,10 +3,6 @@ web1:
   type: php
   version: 5.5
   httpd_document_root: web
-  network_dirs:
-    storage1:
-      - /config
-      - /cache
   php_extensions:
     - zip
     - curl
@@ -18,6 +14,3 @@ web1:
 #    - "php composer.phar install -o --no-progress"
   before_deploy:
     - "rm -Rf cache/*"
-
-storage1:
-  type: nfs

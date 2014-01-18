@@ -1,0 +1,26 @@
+{
+    "routing.options" : {
+        "resource" : "config/routing.xml",
+        "cache_dir" : "%root_dir%/cache"
+    },
+
+    "dbs.options" : {
+        "default" : {
+            "driver" : "pdo_mysql",
+            "host" : "#DATABASE1_HOST#",
+            "dbname" : "#DATABASE1_NAME#",
+            "user" : "#DATABASE1_USER#",
+            "password" : "#DATABASE1_PASS#",
+            "charset" : "UTF8"
+        }
+    },
+
+    "twig.path" : "%root_dir%/views",
+    "twig.options" : {
+        "cache_dir" : "%root_dir%/cache"
+    },
+
+    "pusher.key" : "#PUSHER_KEY#",
+    "pusher.secret" : "#PUSHER_SECRET#",
+    "pusher.app_id" : 24733
+}

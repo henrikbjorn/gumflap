@@ -35,7 +35,7 @@ class Application extends \Brick\Application
 
     public function boot()
     {
-        $this->configure('config/gumflap.json');
+        $this->configure('config/' . (getenv('APP_NAME') ? 'prod' : 'dev') . '.json');
 
         parent::boot();
     }

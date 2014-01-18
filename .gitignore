@@ -1,4 +1,4 @@
-config/gumflap.json
+config/dev.json
 config/*.db
 
 coverage
