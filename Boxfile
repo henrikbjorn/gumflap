@@ -9,8 +9,5 @@ web1:
     - pdo_mysql
   php_zend_extensions:
     - opcache
-#  after_build:
-#    - "mkdir ~/.composer && echo '{\"config\":{\"github-oauth\": {\"github.com\":\"fa354b2f030836334eac842f8fd69a03e353d247\"}}}' > ~/.composer/config.json"
-#    - "php composer.phar install -o --no-progress"
-  before_deploy:
-    - "rm -Rf cache/*"
+  after_build:
+    - "composer dump-autoload"
