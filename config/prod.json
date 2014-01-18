@@ -11,6 +11,7 @@
             "dbname" : "#DATABASE1_NAME#",
             "user" : "#DATABASE1_USER#",
             "password" : "#DATABASE1_PASS#",
+            "port" : "#DATABASE1_PORT#",
             "charset" : "UTF8"
         }
     },
