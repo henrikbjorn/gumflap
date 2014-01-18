@@ -1,17 +1,23 @@
 web1:
   name: Gumflap
-  document_root: web
-  php_version: 5.4.14
-  shared_writable_dirs:
-    - /config
-    - /cache
+  type: php
+  version: 5.5
+  httpd_document_root: web
+  network_dirs:
+    storage1:
+      - /config
+      - /cache
   php_extensions:
     - zip
     - curl
     - pdo_mysql
-  after_build:
-    - "mkdir ~/.composer && echo '{\"config\":{\"github-oauth\": {\"github.com\":\"fa354b2f030836334eac842f8fd69a03e353d247\"}}}' > ~/.composer/config.json"
-    - "if [ ! -f composer.phar ]; then curl -s http://getcomposer.org/installer | php; fi;"
-    - "php composer.phar install -o --no-progress"
+  php_zend_extensions:
+    - opcache
+#  after_build:
+#    - "mkdir ~/.composer && echo '{\"config\":{\"github-oauth\": {\"github.com\":\"fa354b2f030836334eac842f8fd69a03e353d247\"}}}' > ~/.composer/config.json"
+#    - "php composer.phar install -o --no-progress"
   before_deploy:
     - "rm -Rf cache/*"
+
+storage1:
+  type: nfs
